@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Labb_3.Models.Personer>
+
+@{
+    ViewData["Title"] = "PersonLista";
+}
+
+<h1>Team Mosbrickas Fiskare</h1>
+
+<p>
+    <a asp-controller="Person" asp-action="InsertPerson">Lägg till fiskare</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Persnr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Namn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telnr)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Persnr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Namn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telnr)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "UpdatePersoner", new { id=item.Persnr  }) |
+              
+                @Html.ActionLink("Delete", "DeletePerson", new {  id=item.Persnr })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewData["Title"] = "Sokning";
+}
+
+<h1>Sökning</h1>
+
+<p>
+    <a asp-controller="Person" asp-action="InsertFisk">Rapportera Ny Fångst</a>
+</p>
+
+<p> @ViewBag.error</p>
+
+
+
+<div class="row">
+    <form asp-action="Sokning" method="post" class="form-inline d-flex justify-content-center md-form form-sm active-pink active-pink-2 mt-2"  >
+        <i class="fas fa-search" aria-hidden="true"> </i>
+
+            <input class="form-control form-control-sm ml-3 w-75" id="SokString" name="SokString" type="search" placeholder="Sök namn" />
+        
+        <div class="form-group">
+            <input type="submit" value="Sök" class="btn btn-primary btn-sm" />
+        </div>
+    </form>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Art</></th>
+            <th>Vikt</th>
+            <th>Vatten</th>
+            <th>Namn</a></th>
+            <th>typ</th>
+            <th>färg</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Labb_3.Models.Totalus f1 in Model.TotalusFiltLista)
+        {
+            <tr>
+
+                <td>@f1.ID</td>
+                <td>@f1.Art</td>
+                <td>@f1.Vikt</td>
+                <td>@f1.Vatten</td>
+                <td>@f1.Namn</td>
+                <td>@f1.Typ</td>
+                <td>@f1.Color</td>
+
+                <td>
+                    @Html.ActionLink("Edit", "UpdateFisk", new { id = f1.ID }) |
+
+                    @Html.ActionLink("Delete", "DeleteFisk", new { id = f1.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,58 @@
+﻿@model Labb_3.Models.Fiskar
+
+@{
+    ViewData["Title"] = "InsertFisk";
+}
+
+<h1>Rapportera fångst</h1>
+
+<p>antal rader uppdaterade: @ViewBag.antal</p>
+error meddelande: @ViewBag.error
+
+<h4>Fiskar</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="InsertFisk">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                    <label asp-for="ID" class="control-label"></label>
+                    <input asp-for="ID" class="form-control" />
+                    <span asp-validation-for="ID" class="text-danger"></span>
+                </div>*@
+            <div class="form-group">
+                <label asp-for="Art" class="control-label"></label>
+                <input asp-for="Art" class="form-control" />
+                <span asp-validation-for="Art" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Vikt" class="control-label"></label>
+                <input asp-for="Vikt" class="form-control" />
+                <span asp-validation-for="Vikt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Vatten" class="control-label"></label>
+                <input asp-for="Vatten" class="form-control" />
+                <span asp-validation-for="Vatten" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Persnr" class="control-label"></label>
+                <input asp-for="Persnr" class="form-control" />
+                <span asp-validation-for="Persnr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Betenr" class="control-label"></label>
+                <input asp-for="Betenr" class="form-control" />
+                <span asp-validation-for="Betenr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="VisaFiskar">tillbaka till listan</a>
+</div>
+

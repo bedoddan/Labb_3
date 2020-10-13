@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Labb_3.Models.Beten>
+
+@{
+    ViewData["Title"] = "VisaBeten";
+}
+
+<h1>Beten</h1>
+@ViewBag.error
+
+<p>
+    <a asp-action="InsertBete">Lägg till bete</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Typ)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Typ)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "UpdateBeten", new { id=item.ID}) |
+                @Html.ActionLink("Delete", "DeleteBete", new {  id=item.ID })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

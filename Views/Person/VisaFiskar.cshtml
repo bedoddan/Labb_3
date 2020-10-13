@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Labb_3.Models.Totalus>
+
+@{
+    ViewData["Title"] = "VisaFiskar";
+}
+
+<h1>Fångster</h1>
+
+<p>
+    <a asp-controller="Person" asp-action="InsertFisk">Rapportera Ny Fångst</a>
+</p>
+
+@*<div class="row">
+    <div class="form-group">
+        <select class="form-control" id="Arter" name="Arter">
+            @foreach (Labb_3.Models.Totalus t1 in Model.)
+        </select>
+    </div>
+</div>*@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Art)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vatten)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vikt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Namn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Typ)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Art)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vatten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vikt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Namn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Typ)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "UpdateFisk", new { id=item.ID}) |
+                
+                @Html.ActionLink("Delete", "DeleteFisk", new { id = item.ID })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

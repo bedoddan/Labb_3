@@ -1,0 +1,161 @@
+﻿
+//Min connectionString
+Data Source=(localdb)\mssqllocaldb;Initial Catalog=FiskDB_Labb3;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
+
+public List<Fiskar> GetFiskarWithDataSet(out string errormsg)
+        {
+            SqlConnection dbConnection = new SqlConnection();
+
+            dbConnection.ConnectionString = @"Data Source=(localdb)\mssqllocaldb;Initial Catalog=FiskDB_Labb3;Integrated Security=True";
+
+            String sqlstring = "SELECT Art, Vikt, Vatten, Namn, Typ, Color FROM Fiskar, Beten, Personer WHERE Beten.Betenr = Fiskar.Betenr and Personer.Persnr = Fiskar.Persnr;";
+            SqlCommand dbCommand = new SqlCommand(sqlstring, dbConnection);
+
+            SqlDataAdapter myAdapter = new SqlDataAdapter(dbCommand);
+            DataSet myDS = new DataSet();
+
+            List<Fiskar> Fisklista = new List<Fiskar>();
+
+            try
+            {
+                dbConnection.Open();
+
+                myAdapter.Fill(myDS, "myFisk");
+
+                int count = 0;
+                int i = 0;
+
+                count = myDS.Tables["myFisk"].Rows.Count;
+                
+                if(count > 0)
+                {
+                    while (i < count)
+                    {
+                        Fiskar pd = new Fiskar();
+                        Beten b1 = new Beten();
+                        pd.ID = Convert.ToInt32(myDS.Tables["myFisk"].Rows[i]["FiskID"]);
+                        pd.Art = myDS.Tables["myFisk"].Rows[i]["Art"].ToString();
+                        pd.Vikt = Convert.ToInt32(myDS.Tables["myFisk"].Rows[i]["Vikt"]);
+                        pd.Vatten = myDS.Tables["myFisk"].Rows[i]["Vatten"].ToString();
+                        
+                        
+
+                        i++;
+                        Fisklista.Add(pd);
+                        
+
+                    }
+                    errormsg = "";
+                    return Fisklista;
+                }
+                else
+                { errormsg = "Det hämtas ingen FISK!";
+                    return null;
+                }
+            }
+            catch (Exception e)
+            { 
+                errormsg = e.Message;
+                return null;
+            }
+            finally
+            { 
+                dbConnection.Close();
+            }
+        }
+
+        @model Labb_3.Models.FiltreringModell
+
+
+@{
+    ViewData["Title"] = "Sortering";
+
+}
+----------------------------------------------------------------------------------------------
+<h1>Sortering</h1>
+
+ViewBag.sort: @ViewBag.sort
+<p> ViewBag error: @ViewBag.error</p>
+ViewData: @ViewData["sort"];
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Art</th>
+            <th>Vikt</th>
+            <th>Vatten</th>
+            <th>Namn</th>
+            <th>typ</th>
+            <th>färg</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Labb_3.Models.Totalus f1 in Model.TotalusFiltLista)
+        {
+            <tr>
+                <!--<td>-->
+                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                <!--</td-->
+
+                <td>@f1.ID</td>
+                <td>@f1.Art</td>
+                <td>@f1.Vikt</td>
+                <td>@f1.Vatten</td>
+                <td>@f1.Namn</td>
+                <td>@f1.Typ</td>
+                <td>@f1.Color</td>
+
+                <td>
+                    @Html.ActionLink("Edit", "UpdateFisk", new { id = f1.ID }) |
+
+                    @Html.ActionLink("Delete", "DeleteFisk", new { id = f1.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+--------------------------------------------------------------------------------------------
+Andreas KOD
+
+@model Labb3an.Models.ViewModelAD
+@{
+    ViewData["Title"] = "Filtrering3";
+}
+@{
+    int i = 0;
+    if (ViewData["Djur"] != null) { i = (int)ViewData["Djur"]; }
+    string s = ViewBag.message;
+    if (@ViewBag.message != null)
+    {
+    }
+}
+<h2>Filtrering 3</h2>
+<p><b>Dropdown med lista från vy-modell</b></p>
+<div class="row">
+    <div class="form-group col-md-4">
+        <form asp-action="Filtrering3">
+            <div class="form-group">
+                <select class="form-control" id="Djur" name="Djur">
+                   
+                    @foreach (Labb3an.Models.DjurDetalj DjurDetalj in Model.DjurDetaljLista)
+                    {
+                        @if (DjurDetalj.DjurID != i)
+                        {
+                            <option value="@DjurDetalj.DjurID"> @DjurDetalj.DjurID</option>
+                        }
+                        else
+                        {
+                            <option value="@DjurDetalj.DjurID" Selected> @DjurDetalj.DjurID</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Filtrera" class="btn btn-light" />
+            </div>
+        </form>
+    </div>
+</div>

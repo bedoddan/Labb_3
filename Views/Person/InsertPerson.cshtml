@@ -1,0 +1,40 @@
+﻿@model Labb_3.Models.Personer
+
+@{
+    ViewData["Title"] = "InsertPerson";
+}
+
+<h1>Lägg till en fiskare</h1>
+
+<h4>Personer</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="InsertPerson">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Persnr" class="control-label"></label>
+                <input asp-for="Persnr" class="form-control" />
+                <span asp-validation-for="Persnr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Namn" class="control-label"></label>
+                <input asp-for="Namn" class="form-control" />
+                <span asp-validation-for="Namn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telnr" class="control-label"></label>
+                <input asp-for="Telnr" class="form-control" />
+                <span asp-validation-for="Telnr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="VisaFiskar">Back to List</a>
+</div>
+

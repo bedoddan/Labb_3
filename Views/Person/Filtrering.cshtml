@@ -1,0 +1,70 @@
+﻿@model Labb_3.Models.FiltreringModell
+
+
+@{
+    ViewData["Title"] = "Filtrering";
+    
+    int i = 0;
+    if (ViewData ["ValdArt"] != null) { i = (int)ViewData["ValdArt"]; }
+    string s1 = ViewBag.message;
+}
+
+
+<p> @ViewBag.error</p>
+
+
+
+<div class="row">
+    <form asp-action="Filtrering">
+        <div class="form-group">
+            <select class="form-control" id="ValdArt" name="ValdArt">
+
+                @foreach (Labb_3.Models.Totalus t1 in Model.TotalusFiltLista)
+                {
+                        <option value="@t1.ID" selected> @t1.Art</option> 
+                    }
+            </select>
+
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Filtrera" class="btn btn-dark" />
+        </div>
+    </form>
+    </div>
+
+<p>Det inskickade värdet är: @ViewData["ValdArt"] </p>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Art</></th>
+            <th>Vikt</th>
+            <th>Vatten</th>
+            <th>Namn</a></th>
+            <th>typ</th>
+            <th>färg</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (Labb_3.Models.Totalus f1 in Model.TotalusFiltLista) {
+        <tr>
+
+            <td>@f1.ID</td>
+            <td>@f1.Art</td>
+            <td>@f1.Vikt</td>
+            <td>@f1.Vatten</td>
+            <td>@f1.Namn</td>
+            <td>@f1.Typ</td>
+            <td>@f1.Color</td>
+
+            <td>
+                @Html.ActionLink("Edit", "UpdateFisk", new { id = f1.ID }) |
+
+                @Html.ActionLink("Delete", "DeleteFisk", new { id = f1.ID })
+              </td>
+        </tr>
+}
+    </tbody>
+</table>
