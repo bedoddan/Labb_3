@@ -1,15 +1,5 @@
 ﻿@model Labb_3.Models.FiltreringModell
 
-
-@{
-    ViewData["Title"] = "Filtrering";
-    
-    int i = 0;
-    if (ViewData ["ValdArt"] != null) { i = (int)ViewData["ValdArt"]; }
-    string s1 = ViewBag.message;
-}
-
-
 <p> @ViewBag.error</p>
 
 
@@ -21,7 +11,7 @@
 
                 @foreach (Labb_3.Models.Totalus t1 in Model.TotalusFiltLista)
                 {
-                        <option value="@t1.ID" selected> @t1.Art</option> 
+                        <option value="@t1.ID"> @t1.Art</option> 
                     }
             </select>
 

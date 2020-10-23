@@ -18,9 +18,22 @@ namespace Labb_3.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult InsertPerson()
+        {
+            int i = 0;
+            string error = "";
+           
+            ViewBag.error = error;
+            ViewBag.antal = i;
+
+            return View();
+        }
+
+        [HttpPost]
         public IActionResult InsertPerson(IFormCollection fc)
         {
-            
+
             Personer p1 = new Personer();
             PersonMetoder pm = new PersonMetoder();
 
@@ -36,7 +49,7 @@ namespace Labb_3.Controllers
             ViewBag.error = error;
             ViewBag.antal = i;
 
-            return View();
+            return RedirectToAction("VisaFiskar");
         }
 
 
